@@ -1,6 +1,8 @@
 package serija;
 
-public class Epizoda {
+import java.io.Serializable;
+
+public class Epizoda implements Serializable{
 
 	private String naziv;
 	private String sxe;

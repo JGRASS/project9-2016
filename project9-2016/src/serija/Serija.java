@@ -1,8 +1,9 @@
 package serija;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Serija {
+public class Serija implements Serializable{
 	
 	private String naziv;
 	private String opis;
