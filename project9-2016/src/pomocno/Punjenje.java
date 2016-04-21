@@ -54,7 +54,7 @@ public class Punjenje {
 			serije.add(Shameless);
 			serije.add(SailorMoon);
 			ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(
-					"C:\\Users\\djord\\git\\project9-2016\\project9-2016\\resources\\serije.out")));
+					"resources\\serije.out")));
 			out.writeObject(serije);
 			out.close();
 		} catch (Exception e) {

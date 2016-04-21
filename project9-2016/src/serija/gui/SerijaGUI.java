@@ -87,7 +87,7 @@ public class SerijaGUI extends JFrame {
 			DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 			try {
 				ObjectInputStream in = new ObjectInputStream(
-						new FileInputStream("C:\\Users\\djord\\git\\project9-2016\\project9-2016\\resources\\serije.out"));
+						new FileInputStream("resources\\serije.out"));
 				try {
 					while (true) {
 						serije = (LinkedList<Serija>) in.readObject();
