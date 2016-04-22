@@ -30,6 +30,9 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 public class SerijaGUI extends JFrame {
 
@@ -67,6 +70,9 @@ public class SerijaGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public SerijaGUI() {
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage(SerijaGUI.class.getResource("/com/sun/javafx/webkit/prism/resources/missingImage.png")));
+		setResizable(false);
 		setTitle("TvShows");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -109,9 +115,12 @@ public class SerijaGUI extends JFrame {
 			
 			comboBoxNaziviSerija.setModel(model);
 			
+			
+			
 			comboBoxNaziviSerija.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					switch (comboBoxNaziviSerija.getSelectedIndex()) {
+					JComboBox cb = (JComboBox) arg0.getSource();
+					switch (cb.getSelectedIndex()) {
 					case 0:
 						lblNaziv.setText(serije.get(0).getNaziv());
 						lblGodina.setText(serije.get(0).getGodina());
@@ -144,14 +153,14 @@ public class SerijaGUI extends JFrame {
 	private JPanel getPanelCenter() {
 		if (panelCenter == null) {
 			panelCenter = new JPanel();
-			panelCenter.setLayout(new MigLayout("", "[][][][][][][grow]", "[][][][][][grow]"));
-			panelCenter.add(getLblNaziv(), "cell 1 0");
-			panelCenter.add(getLblGodina(), "cell 2 0");
-			panelCenter.add(getLblPostava(), "cell 3 0");
-			panelCenter.add(getLblStvarnaPostava(), "cell 3 1");
-			panelCenter.add(getLblSlika(), "cell 0 2");
-			panelCenter.add(getBtnEpizode(), "cell 0 3");
-			panelCenter.add(getScrollPaneOpis(), "cell 3 4,grow");
+			panelCenter.setLayout(null);
+			panelCenter.add(getLblNaziv());
+			panelCenter.add(getLblGodina());
+			panelCenter.add(getLblPostava());
+			panelCenter.add(getLblStvarnaPostava());
+			panelCenter.add(getLblSlika());
+			panelCenter.add(getBtnEpizode());
+			panelCenter.add(getScrollPaneOpis());
 		}
 		return panelCenter;
 	}
@@ -159,6 +168,8 @@ public class SerijaGUI extends JFrame {
 	private JLabel getLblNaziv() {
 		if (lblNaziv == null) {
 			lblNaziv = new JLabel("Naziv");
+			lblNaziv.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lblNaziv.setBounds(147, 11, 221, 33);
 		}
 
 		return lblNaziv;
@@ -167,6 +178,8 @@ public class SerijaGUI extends JFrame {
 	private JLabel getLblSlika() {
 		if (lblSlika == null) {
 			lblSlika = new JLabel("");
+			lblSlika.setPreferredSize(new Dimension(100, 200));
+			lblSlika.setBounds(7, 25, 99, 135);
 		}
 		return lblSlika;
 	}
@@ -174,6 +187,7 @@ public class SerijaGUI extends JFrame {
 	private JScrollPane getScrollPaneOpis() {
 		if (scrollPaneOpis == null) {
 			scrollPaneOpis = new JScrollPane();
+			scrollPaneOpis.setBounds(147, 148, 277, 72);
 			scrollPaneOpis.setViewportView(getTextAreaOpis());
 		}
 		return scrollPaneOpis;
@@ -189,6 +203,7 @@ public class SerijaGUI extends JFrame {
 	private JLabel getLblGodina() {
 		if (lblGodina == null) {
 			lblGodina = new JLabel("Godina");
+			lblGodina.setBounds(147, 65, 171, 14);
 		}
 		return lblGodina;
 	}
@@ -196,13 +211,15 @@ public class SerijaGUI extends JFrame {
 	private JLabel getLblPostava() {
 		if (lblPostava == null) {
 			lblPostava = new JLabel("Postava:");
+			lblPostava.setBounds(147, 90, 200, 14);
 		}
 		return lblPostava;
 	}
 
 	private JLabel getLblStvarnaPostava() {
 		if (lblStvarnaPostava == null) {
-			lblStvarnaPostava = new JLabel("Stvarna postava...");
+			lblStvarnaPostava = new JLabel("");
+			lblStvarnaPostava.setBounds(147, 115, 221, 14);
 		}
 		return lblStvarnaPostava;
 	}
@@ -210,6 +227,7 @@ public class SerijaGUI extends JFrame {
 	private JButton getBtnEpizode() {
 		if (btnEpizode == null) {
 			btnEpizode = new JButton("Epizode");
+			btnEpizode.setBounds(10, 197, 99, 23);
 		}
 		return btnEpizode;
 	}

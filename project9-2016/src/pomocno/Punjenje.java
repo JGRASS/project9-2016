@@ -39,13 +39,13 @@ public class Punjenje {
 	}
 
 	private static Serija Empire = new Serija("Empire",
-			"A hip-hop mogul must choose between his three sons who are battling for control over his multi-million dollar company, while his ex-wife schemes to get what's hers.",
+			"A hip-hop mogul must choose between\n his three sons who are battling for control over his\n multi-million dollar company, \nwhile his ex-wife schemes to get what's hers.",
 			"Terrence Howard, Taraji P. Henson, Jussie Smollett", "2015", Punjenje.napuniLisuEpizoda0());
 	private static Serija Shameless = new Serija("Shameless",
-			"An alcoholic man lives in a perpetual stupor while his six children with whom he lives cope as best they can.",
+			"An alcoholic man lives in a perpetual\n stupor while his six children with whom he lives cope\n as best they can.",
 			"Emmy Rossum, William H. Macy, Ethan Cutkosky", "2011", Punjenje.napuniLisuEpizoda1());
 	private static Serija SailorMoon = new Serija("Sailor Moon",
-			"The magical action-adventures of a teenage girl who learns of her destiny as the legendary warrior Sailor Moon and must band together with the other Sailor Soldiers to defend the Earth and Galaxy.",
+			"The magical action-adventures of a\n teenage girl who learns of her destiny as the legendary\n warrior Sailor Moon and must band\n together with the other Sailor Soldiers\n to defend the Earth and Galaxy.",
 			"Susan Roman, Jill Frappier, Katie Griffin", "1992", Punjenje.napuniLisuEpizoda2());
 
 	public static void napunISerijalizujSerije() {
