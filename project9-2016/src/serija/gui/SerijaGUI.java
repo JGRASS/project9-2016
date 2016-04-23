@@ -33,6 +33,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 
 public class SerijaGUI extends JFrame {
 
@@ -48,6 +50,7 @@ public class SerijaGUI extends JFrame {
 	private JLabel lblStvarnaPostava;
 	private JButton btnEpizode;
 	public static LinkedList<Serija> serije = new LinkedList<Serija>();
+	private int index;
 
 	/**
 	 * Launch the application.
@@ -71,7 +74,7 @@ public class SerijaGUI extends JFrame {
 	 */
 	public SerijaGUI() {
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(SerijaGUI.class.getResource("/com/sun/javafx/webkit/prism/resources/missingImage.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\starij_televizor-600x588.png"));
 		setResizable(false);
 		setTitle("TvShows");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,24 +121,28 @@ public class SerijaGUI extends JFrame {
 			
 			
 			comboBoxNaziviSerija.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					JComboBox cb = (JComboBox) arg0.getSource();
-					switch (cb.getSelectedIndex()) {
-					case 0:
+				public void actionPerformed(ActionEvent e) {
+					JComboBox cb = (JComboBox) e.getSource();
+	
+					if (cb.getSelectedIndex() == 0){
 						lblNaziv.setText(serije.get(0).getNaziv());
 						lblGodina.setText(serije.get(0).getGodina());
 						lblStvarnaPostava.setText(serije.get(0).getPostava());
 						ImageIcon image0 = new ImageIcon("resources\\0.jpg");
 						lblSlika.setIcon(image0);
 						getTextAreaOpis().setText(serije.get(0).getOpis());
-					case 1:
+					}
+					
+					if (cb.getSelectedIndex() == 1){
 						lblNaziv.setText(serije.get(1).getNaziv());
 						lblGodina.setText(serije.get(1).getGodina());
 						lblStvarnaPostava.setText(serije.get(1).getPostava());
 						ImageIcon image1 = new ImageIcon("resources\\1.jpg");
 						lblSlika.setIcon(image1);
 						getTextAreaOpis().setText(serije.get(1).getOpis());
-					case 2:
+					}
+					
+					if (cb.getSelectedIndex() == 2){
 						lblNaziv.setText(serije.get(2).getNaziv());
 						lblGodina.setText(serije.get(2).getGodina());
 						lblStvarnaPostava.setText(serije.get(2).getPostava());
@@ -143,6 +150,8 @@ public class SerijaGUI extends JFrame {
 						lblSlika.setIcon(image2);
 						getTextAreaOpis().setText(serije.get(2).getOpis());
 					}
+					
+					index = comboBoxNaziviSerija.getSelectedIndex();
 				}
 			});
 		}
@@ -179,7 +188,7 @@ public class SerijaGUI extends JFrame {
 		if (lblSlika == null) {
 			lblSlika = new JLabel("");
 			lblSlika.setPreferredSize(new Dimension(100, 200));
-			lblSlika.setBounds(7, 25, 99, 135);
+			lblSlika.setBounds(7, 11, 130, 175);
 		}
 		return lblSlika;
 	}
@@ -227,7 +236,13 @@ public class SerijaGUI extends JFrame {
 	private JButton getBtnEpizode() {
 		if (btnEpizode == null) {
 			btnEpizode = new JButton("Epizode");
-			btnEpizode.setBounds(10, 197, 99, 23);
+			btnEpizode.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					EpizodaGUI epizodeProzor = new EpizodaGUI(index);
+					epizodeProzor.setVisible(true);
+				}
+			});
+			btnEpizode.setBounds(10, 197, 127, 23);
 		}
 		return btnEpizode;
 	}
