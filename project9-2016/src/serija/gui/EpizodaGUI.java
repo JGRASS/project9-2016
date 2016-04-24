@@ -63,8 +63,8 @@ public class EpizodaGUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		contentPane.add(getPanel(), BorderLayout.NORTH);
-		contentPane.add(getListEpizode(), BorderLayout.CENTER);
 		index = i;
+		contentPane.add(getListEpizode(), BorderLayout.CENTER);
 	}
 
 	private JPanel getPanel() {
