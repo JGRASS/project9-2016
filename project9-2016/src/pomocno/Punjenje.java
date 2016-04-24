@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import serija.Epizoda;
+import serija.Glumac;
 import serija.Serija;
 
 public class Punjenje {
@@ -37,16 +38,23 @@ public class Punjenje {
 		ep.add(new Epizoda("Mzsterious Sleeping...", "1x3", "Nije pogledano.", "Mar 21, 1992"));
 		return ep;
 	}
+	public static LinkedList<Glumac> napuniListuGlumac0(){
+		LinkedList<Glumac> gl=new LinkedList<Glumac>();
+		gl.add(new Glumac("Emmy Rossum", "21", "Beograd"));
+		gl.add(new Glumac("Terrence Howard", "21", "Beograd"));
+		gl.add(new Glumac("Taraji P. Henson", "21", "Beograd"));
+		return gl;
+	}
 
 	private static Serija Empire = new Serija("Empire",
 			"A hip-hop mogul must choose between\n his three sons who are battling for control over his\n multi-million dollar company, \nwhile his ex-wife schemes to get what's hers.",
-			"Terrence Howard, Taraji P. Henson, Jussie Smollett", "2015", Punjenje.napuniLisuEpizoda0());
+			Punjenje.napuniListuGlumac0(), "2015", Punjenje.napuniLisuEpizoda0());
 	private static Serija Shameless = new Serija("Shameless",
 			"An alcoholic man lives in a perpetual\n stupor while his six children with whom he lives cope\n as best they can.",
-			"Emmy Rossum, William H. Macy, Ethan Cutkosky", "2011", Punjenje.napuniLisuEpizoda1());
+			Punjenje.napuniListuGlumac0(), "2011", Punjenje.napuniLisuEpizoda1());
 	private static Serija SailorMoon = new Serija("Sailor Moon",
 			"The magical action-adventures of a\n teenage girl who learns of her destiny as the legendary\n warrior Sailor Moon and must band\n together with the other Sailor Soldiers\n to defend the Earth and Galaxy.",
-			"Susan Roman, Jill Frappier, Katie Griffin", "1992", Punjenje.napuniLisuEpizoda2());
+			Punjenje.napuniListuGlumac0(), "1992", Punjenje.napuniLisuEpizoda2());
 
 	public static void napunISerijalizujSerije() {
 		try {
@@ -54,8 +62,9 @@ public class Punjenje {
 			serije.add(Shameless);
 			serije.add(SailorMoon);
 			ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(
-					"resources\\serije.out")));
+					"resources\\serije.out",false)));
 			out.writeObject(serije);
+			out.flush();
 			out.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

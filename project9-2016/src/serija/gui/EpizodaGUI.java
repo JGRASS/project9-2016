@@ -2,6 +2,7 @@ package serija.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -96,8 +97,8 @@ public class EpizodaGUI extends JFrame {
 					serije.set(index, serija);
 					
 					try {
-						ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(
-								"resources\\serije.out")));
+						ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
+								"resources\\serije.out"));
 						out.writeObject(serije);
 						out.close();
 					} catch (Exception e1) {
@@ -108,7 +109,7 @@ public class EpizodaGUI extends JFrame {
 			});
 
 			try {
-				ObjectInputStream in = new ObjectInputStream(new FileInputStream("resources\\serije.out"));
+				ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("resources\\serije.out")));
 				try {
 					while (true) {
 						serije = (LinkedList<Serija>) in.readObject();

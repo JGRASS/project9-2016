@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import net.miginfocom.swing.MigLayout;
 import pomocno.Punjenje;
+import serija.Glumac;
 import serija.Serija;
 
 import javax.swing.DebugGraphics;
@@ -24,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -123,11 +125,17 @@ public class SerijaGUI extends JFrame {
 			comboBoxNaziviSerija.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JComboBox cb = (JComboBox) e.getSource();
-	
+					LinkedList<Glumac> postava=new LinkedList<Glumac>(); 
+					
 					if (cb.getSelectedIndex() == 0){
 						lblNaziv.setText(serije.get(0).getNaziv());
 						lblGodina.setText(serije.get(0).getGodina());
-						lblStvarnaPostava.setText(serije.get(0).getPostava());
+						postava=serije.get(0).getPostava();
+						String stvarnaPostava="";
+						for (int i = 0; i < postava.size(); i++) {
+							stvarnaPostava=stvarnaPostava+" "+postava.get(i).getImePrezime();
+						}
+						lblStvarnaPostava.setText(stvarnaPostava);
 						ImageIcon image0 = new ImageIcon("resources\\0.jpg");
 						lblSlika.setIcon(image0);
 						getTextAreaOpis().setText(serije.get(0).getOpis());
@@ -136,7 +144,12 @@ public class SerijaGUI extends JFrame {
 					if (cb.getSelectedIndex() == 1){
 						lblNaziv.setText(serije.get(1).getNaziv());
 						lblGodina.setText(serije.get(1).getGodina());
-						lblStvarnaPostava.setText(serije.get(1).getPostava());
+						postava=serije.get(1).getPostava();
+						String stvarnaPostava="";
+						for (int i = 0; i < postava.size(); i++) {
+							stvarnaPostava=stvarnaPostava+" "+postava.get(i).getImePrezime();
+						}
+						lblStvarnaPostava.setText(stvarnaPostava);
 						ImageIcon image1 = new ImageIcon("resources\\1.jpg");
 						lblSlika.setIcon(image1);
 						getTextAreaOpis().setText(serije.get(1).getOpis());
@@ -145,7 +158,12 @@ public class SerijaGUI extends JFrame {
 					if (cb.getSelectedIndex() == 2){
 						lblNaziv.setText(serije.get(2).getNaziv());
 						lblGodina.setText(serije.get(2).getGodina());
-						lblStvarnaPostava.setText(serije.get(2).getPostava());
+						postava=serije.get(2).getPostava();
+						String stvarnaPostava="";
+						for (int i = 0; i < postava.size(); i++) {
+							stvarnaPostava=stvarnaPostava+"" +postava.get(i).getImePrezime();
+						}
+						lblStvarnaPostava.setText(stvarnaPostava);
 						ImageIcon image2 = new ImageIcon("resources\\2.jpg");
 						lblSlika.setIcon(image2);
 						getTextAreaOpis().setText(serije.get(2).getOpis());

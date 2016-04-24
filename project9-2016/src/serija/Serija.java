@@ -7,12 +7,12 @@ public class Serija implements Serializable{
 	
 	private String naziv;
 	private String opis;
-	private String postava;
+	public LinkedList<Glumac> postava = new LinkedList<Glumac>();
 	private String godina;
 	
 	public LinkedList<Epizoda> epizode = new LinkedList<Epizoda>();
 	
-	public Serija(String n, String o, String p, String g, LinkedList<Epizoda> e) {
+	public Serija(String n, String o, LinkedList<Glumac> p, String g, LinkedList<Epizoda> e) {
 		naziv = n;
 		opis = o;
 		postava = p;
@@ -45,11 +45,11 @@ public class Serija implements Serializable{
 		this.opis = opis;
 	}
 
-	public String getPostava() {
+	public LinkedList<Glumac> getPostava() {
 		return postava;
 	}
 
-	public void setPostava(String postava) {
+	public void setPostava(LinkedList<Glumac> postava) {
 		this.postava = postava;
 	}
 
