@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.BorderUIResource.EmptyBorderUIResource;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -37,6 +38,10 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class SerijaGUI extends JFrame {
 
@@ -49,10 +54,11 @@ public class SerijaGUI extends JFrame {
 	private JTextArea textAreaOpis;
 	private JLabel lblGodina;
 	private JLabel lblPostava;
-	private JLabel lblStvarnaPostava;
 	private JButton btnEpizode;
-	public static LinkedList<Serija> serije = new LinkedList<Serija>();
+	public LinkedList<Serija> serije = new LinkedList<Serija>();
 	private int index;
+	public static Serija serija;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -128,42 +134,40 @@ public class SerijaGUI extends JFrame {
 					LinkedList<Glumac> postava=new LinkedList<Glumac>(); 
 					
 					if (cb.getSelectedIndex() == 0){
+						serija=serije.get(0);
 						lblNaziv.setText(serije.get(0).getNaziv());
 						lblGodina.setText(serije.get(0).getGodina());
 						postava=serije.get(0).getPostava();
-						String stvarnaPostava="";
 						for (int i = 0; i < postava.size(); i++) {
-							stvarnaPostava=stvarnaPostava+" "+postava.get(i).getImePrezime();
+							table.setValueAt(postava.get(i).getImePrezime(), i, 0);
 						}
-						lblStvarnaPostava.setText(stvarnaPostava);
+						
 						ImageIcon image0 = new ImageIcon("resources\\0.jpg");
 						lblSlika.setIcon(image0);
 						getTextAreaOpis().setText(serije.get(0).getOpis());
 					}
 					
 					if (cb.getSelectedIndex() == 1){
+						serija=serije.get(1);
 						lblNaziv.setText(serije.get(1).getNaziv());
 						lblGodina.setText(serije.get(1).getGodina());
 						postava=serije.get(1).getPostava();
-						String stvarnaPostava="";
 						for (int i = 0; i < postava.size(); i++) {
-							stvarnaPostava=stvarnaPostava+" "+postava.get(i).getImePrezime();
+							table.setValueAt(postava.get(i).getImePrezime(), i, 0);
 						}
-						lblStvarnaPostava.setText(stvarnaPostava);
 						ImageIcon image1 = new ImageIcon("resources\\1.jpg");
 						lblSlika.setIcon(image1);
 						getTextAreaOpis().setText(serije.get(1).getOpis());
 					}
 					
 					if (cb.getSelectedIndex() == 2){
+						serija=serije.get(2);
 						lblNaziv.setText(serije.get(2).getNaziv());
 						lblGodina.setText(serije.get(2).getGodina());
 						postava=serije.get(2).getPostava();
-						String stvarnaPostava="";
 						for (int i = 0; i < postava.size(); i++) {
-							stvarnaPostava=stvarnaPostava+"" +postava.get(i).getImePrezime();
+							table.setValueAt(postava.get(i).getImePrezime(), i, 0);
 						}
-						lblStvarnaPostava.setText(stvarnaPostava);
 						ImageIcon image2 = new ImageIcon("resources\\2.jpg");
 						lblSlika.setIcon(image2);
 						getTextAreaOpis().setText(serije.get(2).getOpis());
@@ -184,10 +188,33 @@ public class SerijaGUI extends JFrame {
 			panelCenter.add(getLblNaziv());
 			panelCenter.add(getLblGodina());
 			panelCenter.add(getLblPostava());
-			panelCenter.add(getLblStvarnaPostava());
 			panelCenter.add(getLblSlika());
 			panelCenter.add(getBtnEpizode());
 			panelCenter.add(getScrollPaneOpis());
+			
+			table = new JTable();
+			table.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent arg0) {
+					int glumac=table.getSelectedRow();
+					if(index==0 || index==1 || index==2){
+						GlumacGUI glumacProzor = new GlumacGUI(glumac);
+					glumacProzor.setVisible(true);
+					}
+				}
+				});
+			table.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null},
+					{null},
+					{null},
+				},
+				new String[] {
+					"New column"
+				}
+			));
+			table.setShowGrid(false);
+			table.setBounds(274, 90, 130, 47);
+			panelCenter.add(table);
 		}
 		return panelCenter;
 	}
@@ -238,17 +265,9 @@ public class SerijaGUI extends JFrame {
 	private JLabel getLblPostava() {
 		if (lblPostava == null) {
 			lblPostava = new JLabel("Postava:");
-			lblPostava.setBounds(147, 90, 200, 14);
+			lblPostava.setBounds(147, 90, 106, 14);
 		}
 		return lblPostava;
-	}
-
-	private JLabel getLblStvarnaPostava() {
-		if (lblStvarnaPostava == null) {
-			lblStvarnaPostava = new JLabel("");
-			lblStvarnaPostava.setBounds(147, 115, 221, 14);
-		}
-		return lblStvarnaPostava;
 	}
 
 	private JButton getBtnEpizode() {

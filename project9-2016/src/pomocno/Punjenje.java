@@ -40,9 +40,23 @@ public class Punjenje {
 	}
 	public static LinkedList<Glumac> napuniListuGlumac0(){
 		LinkedList<Glumac> gl=new LinkedList<Glumac>();
-		gl.add(new Glumac("Emmy Rossum", "21", "Beograd"));
-		gl.add(new Glumac("Terrence Howard", "21", "Beograd"));
-		gl.add(new Glumac("Taraji P. Henson", "21", "Beograd"));
+		gl.add(new Glumac("Terrence Howard", "Mart 11, 1969", "Chicago, Illinois, USA"));
+		gl.add(new Glumac("Taraji P. Henson", "Sept 11, 1970", "Washington, District of Columbia, USA"));
+		gl.add(new Glumac("Jussie Smollett", "Jun 21, 1983", "Santa Rosa, California, USA"));
+		return gl;
+	}
+	public static LinkedList<Glumac> napuniListuGlumac1(){
+		LinkedList<Glumac> gl=new LinkedList<Glumac>();
+		gl.add(new Glumac("Emmy Rossum", "Sept 12, 1986", "New York City, New York, USA"));
+		gl.add(new Glumac("William H. Macy", "Mart 13, 1950", "Miami, Florida, USA"));
+		gl.add(new Glumac("Ethan Cutkosky", "Avg 19, 1999", "St. Charles, Illinois, USA"));
+		return gl;
+	}
+	public static LinkedList<Glumac> napuniListuGlumac2(){
+		LinkedList<Glumac> gl=new LinkedList<Glumac>();
+		gl.add(new Glumac("Susan Roman", "April 17, 1957", "Edmonton, Alberta, Canada"));
+		gl.add(new Glumac("Jill Frappier", "Mart 13, 1950", "Edmonton, Alberta, Canada"));
+		gl.add(new Glumac("Katie Griffin", "Jan 14, 1973", "Toronto, Ontario, Canada"));
 		return gl;
 	}
 
@@ -51,10 +65,10 @@ public class Punjenje {
 			Punjenje.napuniListuGlumac0(), "2015", Punjenje.napuniLisuEpizoda0());
 	private static Serija Shameless = new Serija("Shameless",
 			"An alcoholic man lives in a perpetual\n stupor while his six children with whom he lives cope\n as best they can.",
-			Punjenje.napuniListuGlumac0(), "2011", Punjenje.napuniLisuEpizoda1());
+			Punjenje.napuniListuGlumac1(), "2011", Punjenje.napuniLisuEpizoda1());
 	private static Serija SailorMoon = new Serija("Sailor Moon",
 			"The magical action-adventures of a\n teenage girl who learns of her destiny as the legendary\n warrior Sailor Moon and must band\n together with the other Sailor Soldiers\n to defend the Earth and Galaxy.",
-			Punjenje.napuniListuGlumac0(), "1992", Punjenje.napuniLisuEpizoda2());
+			Punjenje.napuniListuGlumac2(), "1992", Punjenje.napuniLisuEpizoda2());
 
 	public static void napunISerijalizujSerije() {
 		try {
