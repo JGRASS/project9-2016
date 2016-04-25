@@ -10,11 +10,21 @@ import javax.swing.JOptionPane;
 import serija.Epizoda;
 import serija.Glumac;
 import serija.Serija;
-
+/**
+ * Pomocna funkcija koja pravi listu serija i puni ih u binarnu datoteku
+ * @author Ðorðe Popoviæ
+ * @author Nevena Pešiæ
+ *
+ */
 public class Punjenje {
-
+	/**
+	 * Pomocna lista serija
+	 */
 	public static LinkedList<Serija> serije = new LinkedList<Serija>();
-
+	/**
+	 * 
+	 * @return Listu epizoda koja se ubacuje u seriju
+	 */
 	public static LinkedList<Epizoda> napuniLisuEpizoda0() {
 		LinkedList<Epizoda> ep = new LinkedList<Epizoda>();
 		ep.add(new Epizoda("Pilot", "1x1", "Nije pogledano.", "Jan 8, 2015"));
@@ -22,7 +32,10 @@ public class Punjenje {
 		ep.add(new Epizoda("The Devil...", "1x3", "Nije pogledano.", "Jan 29, 2015"));
 		return ep;
 	}
-
+	/**
+	 * 
+	 * @return Listu epizoda koja se ubacuje u seriju
+	 */
 	public static LinkedList<Epizoda> napuniLisuEpizoda1() {
 		LinkedList<Epizoda> ep = new LinkedList<Epizoda>();
 		ep.add(new Epizoda("Pilot", "1x1", "Nije pogledano.", "Jan 10, 2011"));
@@ -30,7 +43,10 @@ public class Punjenje {
 		ep.add(new Epizoda("Aunt Ginger", "1x3", "Nije pogledano.", "Jan 24, 2011"));
 		return ep;
 	}
-
+	/**
+	 * 
+	 * @return Listu epizoda koja se ubacuje u seriju
+	 */
 	public static LinkedList<Epizoda> napuniLisuEpizoda2() {
 		LinkedList<Epizoda> ep = new LinkedList<Epizoda>();
 		ep.add(new Epizoda("Crybaby Usagi...", "1x1", "Nije pogledano.", "Mar 7, 1992"));
@@ -38,6 +54,10 @@ public class Punjenje {
 		ep.add(new Epizoda("Mzsterious Sleeping...", "1x3", "Nije pogledano.", "Mar 21, 1992"));
 		return ep;
 	}
+	/**
+	 * 
+	 * @return Listu glumaca koja se ubacuje u seriju
+	 */
 	public static LinkedList<Glumac> napuniListuGlumac0(){
 		LinkedList<Glumac> gl=new LinkedList<Glumac>();
 		gl.add(new Glumac("Terrence Howard", "Mart 11, 1969", "Chicago, Illinois, USA"));
@@ -45,6 +65,10 @@ public class Punjenje {
 		gl.add(new Glumac("Jussie Smollett", "Jun 21, 1983", "Santa Rosa, California, USA"));
 		return gl;
 	}
+	/**
+	 * 
+	 * @return Listu glumaca koja se ubacuje u seriju
+	 */
 	public static LinkedList<Glumac> napuniListuGlumac1(){
 		LinkedList<Glumac> gl=new LinkedList<Glumac>();
 		gl.add(new Glumac("Emmy Rossum", "Sept 12, 1986", "New York City, New York, USA"));
@@ -52,6 +76,10 @@ public class Punjenje {
 		gl.add(new Glumac("Ethan Cutkosky", "Avg 19, 1999", "St. Charles, Illinois, USA"));
 		return gl;
 	}
+	/**
+	 * 
+	 * @return Listu glumaca koja se ubacuje u seriju
+	 */
 	public static LinkedList<Glumac> napuniListuGlumac2(){
 		LinkedList<Glumac> gl=new LinkedList<Glumac>();
 		gl.add(new Glumac("Susan Roman", "April 17, 1957", "Edmonton, Alberta, Canada"));
@@ -69,7 +97,9 @@ public class Punjenje {
 	private static Serija SailorMoon = new Serija("Sailor Moon",
 			"The magical action-adventures of a\n teenage girl who learns of her destiny as the legendary\n warrior Sailor Moon and must band\n together with the other Sailor Soldiers\n to defend the Earth and Galaxy.",
 			Punjenje.napuniListuGlumac2(), "1992", Punjenje.napuniLisuEpizoda2());
-
+	/**
+	 * Dodaje serije u pomocnu listu i ubacuje ih u binarnu datoteku
+	 */
 	public static void napunISerijalizujSerije() {
 		try {
 			serije.add(Empire);

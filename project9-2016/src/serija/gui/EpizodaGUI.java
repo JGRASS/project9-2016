@@ -25,15 +25,26 @@ import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
-
+/**
+ *Prozor koji pokazuje spisak epizoda izabrane serije
+ * @author Ðorðe Popoviæ
+ * @author Nevena Pešiæ
+ *
+ */
 public class EpizodaGUI extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
 	private JLabel lblEpizode;
 	private JList listEpizode;
+	/**
+	 * Lista epizoda izabrane serije
+	 */
 	public LinkedList<Epizoda> epizode = new LinkedList<Epizoda>();
 	public LinkedList<Serija> serije = new LinkedList<Serija>();
+	/**
+	 * Broj izabrane serije
+	 */
 	public int index;
 
 	/**
@@ -82,7 +93,6 @@ public class EpizodaGUI extends JFrame {
 		}
 		return lblEpizode;
 	}
-
 	private JList getListEpizode() {
 		if (listEpizode == null) {
 			listEpizode = new JList();

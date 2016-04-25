@@ -14,7 +14,12 @@ import serija.Glumac;
 import serija.Serija;
 
 import javax.swing.JLabel;
-
+/**
+ *Prozor koji pokazujedetalje izabranog glumca
+ * @author Ðorðe Popoviæ
+ * @author Nevena Pešiæ
+ *
+ */
 public class GlumacGUI extends JFrame {
 
 	private JPanel contentPane;

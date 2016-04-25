@@ -42,7 +42,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+/**
+ * Glavni prozor aplikacije
+ * @author Ðorðe Popoviæ
+ * @author Nevena Pešiæ
+ *
+ */
 public class SerijaGUI extends JFrame {
 
 	private JPanel contentPane;
@@ -55,8 +60,17 @@ public class SerijaGUI extends JFrame {
 	private JLabel lblGodina;
 	private JLabel lblPostava;
 	private JButton btnEpizode;
+	/**
+	 * Lista serija koje se ucitavaju iz binarne datoteke
+	 */
 	public LinkedList<Serija> serije = new LinkedList<Serija>();
+	/**
+	 * broj izabrane serije iz comboBoxa
+	 */
 	private int index;
+	/**
+	 * Izabrana serija iz comboBoxa
+	 */
 	public static Serija serija;
 	private JTable table;
 
@@ -131,6 +145,9 @@ public class SerijaGUI extends JFrame {
 			comboBoxNaziviSerija.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JComboBox cb = (JComboBox) e.getSource();
+					/**
+					 * Lista glumaca izabrane serije
+					 */
 					LinkedList<Glumac> postava=new LinkedList<Glumac>(); 
 					
 					if (cb.getSelectedIndex() == 0){
