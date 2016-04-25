@@ -90,6 +90,7 @@ public class EpizodaGUI extends JFrame {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					Serija serija = serije.get(index);
+					epizode=serija.getEpizode();
 					Epizoda epizoda = epizode.get(listEpizode.getSelectedIndex());
 					if (epizoda.getStatus().equals("Pogledano.")) epizoda.setStatus("Nije pogledano.");
 					if (epizoda.getStatus().equals("Nije pogledano.")) epizoda.setStatus("Pogledano.");
@@ -98,7 +99,7 @@ public class EpizodaGUI extends JFrame {
 					
 					try {
 						ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
-								"resources\\serije.out"));
+								"resources\\serije.out",false));
 						out.writeObject(serije);
 						out.close();
 					} catch (Exception e1) {
@@ -127,7 +128,6 @@ public class EpizodaGUI extends JFrame {
 
 			DefaultListModel<String> model = new DefaultListModel<String>();
 			LinkedList<Epizoda> epizode = serije.get(index).getEpizode();
-			System.out.println(index);
 			for (int i = 0; i < epizode.size(); i++) {
 				model.addElement(epizode.get(i).toString());
 			}
