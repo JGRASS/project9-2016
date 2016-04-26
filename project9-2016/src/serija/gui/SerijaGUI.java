@@ -42,8 +42,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 /**
  * Glavni prozor aplikacije
+ * 
  * @author Ðorðe Popoviæ
  * @author Nevena Pešiæ
  *
@@ -75,27 +77,10 @@ public class SerijaGUI extends JFrame {
 	private JTable table;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SerijaGUI frame = new SerijaGUI();
-					frame.setVisible(true);
-					Punjenje.napunISerijalizujSerije();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public SerijaGUI() {
-		
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage("resources\\starij_televizor-600x588.png"));
 		setResizable(false);
 		setTitle("TvShows");
@@ -114,61 +99,36 @@ public class SerijaGUI extends JFrame {
 
 		if (comboBoxNaziviSerija == null) {
 			comboBoxNaziviSerija = new JComboBox();
-			
-			DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-			try {
-				ObjectInputStream in = new ObjectInputStream(
-						new FileInputStream("resources\\serije.out"));
-				try {
-					while (true) {
-						serije = (LinkedList<Serija>) in.readObject();
-					}
-				} catch (Exception e) {
 
-				}
-				in.close();
+			comboBoxNaziviSerija.setModel(GUIKontroler.napuniCBModel());
 
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(getContentPane(), e.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
-				System.out.println(e.getMessage());
-				e.printStackTrace(System.out);
-			}
-			
-			model.addElement(serije.get(0).getNaziv());
-			model.addElement(serije.get(1).getNaziv());
-			model.addElement(serije.get(2).getNaziv());
-			
-			comboBoxNaziviSerija.setModel(model);
-			
-			
-			
 			comboBoxNaziviSerija.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JComboBox cb = (JComboBox) e.getSource();
 					/**
 					 * Lista glumaca izabrane serije
 					 */
-					LinkedList<Glumac> postava=new LinkedList<Glumac>(); 
-					
-					if (cb.getSelectedIndex() == 0){
-						serija=serije.get(0);
-						lblNaziv.setText(serije.get(0).getNaziv());
-						lblGodina.setText(serije.get(0).getGodina());
-						postava=serije.get(0).getPostava();
+					LinkedList<Glumac> postava = new LinkedList<Glumac>();
+					serije = GUIKontroler.ucitajIzFajla();
+
+					if (cb.getSelectedIndex() == 0) {
+						serija = serije.get(cb.getSelectedIndex());
+						lblNaziv.setText(serija.getNaziv());
+						lblGodina.setText(serija.getGodina());
+						postava = serija.getPostava();
 						for (int i = 0; i < postava.size(); i++) {
 							table.setValueAt(postava.get(i).getImePrezime(), i, 0);
 						}
-						
 						ImageIcon image0 = new ImageIcon("resources\\0.jpg");
 						lblSlika.setIcon(image0);
 						getTextAreaOpis().setText(serije.get(0).getOpis());
 					}
-					
-					if (cb.getSelectedIndex() == 1){
-						serija=serije.get(1);
-						lblNaziv.setText(serije.get(1).getNaziv());
-						lblGodina.setText(serije.get(1).getGodina());
-						postava=serije.get(1).getPostava();
+
+					if (cb.getSelectedIndex() == 1) {
+						serija = serije.get(cb.getSelectedIndex());
+						lblNaziv.setText(serija.getNaziv());
+						lblGodina.setText(serija.getGodina());
+						postava = serija.getPostava();
 						for (int i = 0; i < postava.size(); i++) {
 							table.setValueAt(postava.get(i).getImePrezime(), i, 0);
 						}
@@ -176,12 +136,12 @@ public class SerijaGUI extends JFrame {
 						lblSlika.setIcon(image1);
 						getTextAreaOpis().setText(serije.get(1).getOpis());
 					}
-					
-					if (cb.getSelectedIndex() == 2){
-						serija=serije.get(2);
-						lblNaziv.setText(serije.get(2).getNaziv());
-						lblGodina.setText(serije.get(2).getGodina());
-						postava=serije.get(2).getPostava();
+
+					if (cb.getSelectedIndex() == 2) {
+						serija = serije.get(cb.getSelectedIndex());
+						lblNaziv.setText(serija.getNaziv());
+						lblGodina.setText(serija.getGodina());
+						postava = serija.getPostava();
 						for (int i = 0; i < postava.size(); i++) {
 							table.setValueAt(postava.get(i).getImePrezime(), i, 0);
 						}
@@ -189,12 +149,12 @@ public class SerijaGUI extends JFrame {
 						lblSlika.setIcon(image2);
 						getTextAreaOpis().setText(serije.get(2).getOpis());
 					}
-					
+
 					index = comboBoxNaziviSerija.getSelectedIndex();
 				}
 			});
 		}
-		
+
 		return comboBoxNaziviSerija;
 	}
 
@@ -208,27 +168,15 @@ public class SerijaGUI extends JFrame {
 			panelCenter.add(getLblSlika());
 			panelCenter.add(getBtnEpizode());
 			panelCenter.add(getScrollPaneOpis());
-			
+
 			table = new JTable();
 			table.addMouseListener(new MouseAdapter() {
 				public void mouseClicked(MouseEvent arg0) {
-					int glumac=table.getSelectedRow();
-					if(index==0 || index==1 || index==2){
-						GlumacGUI glumacProzor = new GlumacGUI(glumac);
-					glumacProzor.setVisible(true);
-					}
+					GUIKontroler.prikaziProzorGlumac(table, index);
 				}
-				});
-			table.setModel(new DefaultTableModel(
-				new Object[][] {
-					{null},
-					{null},
-					{null},
-				},
-				new String[] {
-					"New column"
-				}
-			));
+			});
+			table.setModel(new DefaultTableModel(new Object[][] { { null }, { null }, { null }, },
+					new String[] { "New column" }));
 			table.setShowGrid(false);
 			table.setBounds(274, 90, 130, 47);
 			panelCenter.add(table);
@@ -292,8 +240,7 @@ public class SerijaGUI extends JFrame {
 			btnEpizode = new JButton("Epizode");
 			btnEpizode.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					EpizodaGUI epizodeProzor = new EpizodaGUI(index);
-					epizodeProzor.setVisible(true);
+					GUIKontroler.PrikaziProzorEpizode(index);
 				}
 			});
 			btnEpizode.setBounds(10, 197, 127, 23);

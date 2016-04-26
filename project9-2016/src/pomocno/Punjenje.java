@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import serija.Epizoda;
 import serija.Glumac;
 import serija.Serija;
+import serija.gui.GUIKontroler;
 /**
  * Pomocna funkcija koja pravi listu serija i puni ih u binarnu datoteku
  * @author Ðorðe Popoviæ
@@ -101,19 +102,11 @@ public class Punjenje {
 	 * Dodaje serije u pomocnu listu i ubacuje ih u binarnu datoteku
 	 */
 	public static void napunISerijalizujSerije() {
-		try {
-			serije.add(Empire);
-			serije.add(Shameless);
-			serije.add(SailorMoon);
-			ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(
-					"resources\\serije.out",false)));
-			out.writeObject(serije);
-			out.flush();
-			out.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
+		serije.add(Empire);
+		serije.add(Shameless);
+		serije.add(SailorMoon);
+		//System.out.println(serije.get(0).getNaziv());
+		GUIKontroler.upisiUFajl(serije);
 
 	}
 

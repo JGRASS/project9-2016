@@ -25,8 +25,10 @@ import javax.swing.JOptionPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
+
 /**
- *Prozor koji pokazuje spisak epizoda izabrane serije
+ * Prozor koji pokazuje spisak epizoda izabrane serije
+ * 
  * @author Ðorðe Popoviæ
  * @author Nevena Pešiæ
  *
@@ -50,18 +52,12 @@ public class EpizodaGUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EpizodaGUI frame = new EpizodaGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	/*
+	 * public static void main(String[] args) { EventQueue.invokeLater(new
+	 * Runnable() { public void run() { try { EpizodaGUI frame = new
+	 * EpizodaGUI(); frame.setVisible(true); } catch (Exception e) {
+	 * e.printStackTrace(); } } }); }
+	 */
 
 	/**
 	 * Create the frame.
@@ -93,55 +89,20 @@ public class EpizodaGUI extends JFrame {
 		}
 		return lblEpizode;
 	}
+
 	private JList getListEpizode() {
 		if (listEpizode == null) {
 			listEpizode = new JList();
 			listEpizode.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					Serija serija = serije.get(index);
-					epizode=serija.getEpizode();
-					Epizoda epizoda = epizode.get(listEpizode.getSelectedIndex());
-					if (epizoda.getStatus().equals("Pogledano.")) epizoda.setStatus("Nije pogledano.");
-					if (epizoda.getStatus().equals("Nije pogledano.")) epizoda.setStatus("Pogledano.");
-					epizode.set(listEpizode.getSelectedIndex(), epizoda);
-					serije.set(index, serija);
-					
-					try {
-						ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
-								"resources\\serije.out",false));
-						out.writeObject(serije);
-						out.close();
-					} catch (Exception e1) {
-						System.out.println(e1.getMessage());
-						e1.printStackTrace();
-					}
+					GUIKontroler.promeniStatusEpizode(serije, index, listEpizode.getSelectedIndex());
 				}
 			});
 
-			try {
-				ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("resources\\serije.out")));
-				try {
-					while (true) {
-						serije = (LinkedList<Serija>) in.readObject();
-					}
-				} catch (Exception e) {
-					
-				}
-				in.close();
+			serije = GUIKontroler.ucitajIzFajla();
 
-			} catch (Exception e) {
-				JOptionPane.showMessageDialog(getContentPane(), e.getMessage(), "Greska", JOptionPane.ERROR_MESSAGE);
-				System.out.println(e.getMessage());
-				e.printStackTrace(System.out);
-			}
-
-			DefaultListModel<String> model = new DefaultListModel<String>();
-			LinkedList<Epizoda> epizode = serije.get(index).getEpizode();
-			for (int i = 0; i < epizode.size(); i++) {
-				model.addElement(epizode.get(i).toString());
-			}
-			listEpizode.setModel(model);
+			listEpizode.setModel(GUIKontroler.napuniModelLista(index));
 
 		}
 		return listEpizode;
