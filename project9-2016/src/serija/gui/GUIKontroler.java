@@ -19,7 +19,12 @@ import pomocno.Punjenje;
 import serija.Epizoda;
 import serija.Glumac;
 import serija.Serija;
-
+/**
+ * 
+ * @author Ðorðe Popoviæ
+ * @author Nevena Pešiæ
+ *
+ */
 public class GUIKontroler {
 
 	private static SerijaGUI glavniProzor;
@@ -42,7 +47,10 @@ public class GUIKontroler {
 			}
 		});
 	}
-
+/**
+ * Ucitava iz binarne datoteke listu serija
+ * @return Listu serija iz fajla
+ */
 	public static LinkedList<Serija> ucitajIzFajla() {
 		LinkedList<Serija> serije = new LinkedList<Serija>();
 		try {
@@ -64,7 +72,11 @@ public class GUIKontroler {
 
 		return serije;
 	}
-
+/**
+ * Prikazuje detalje o izabranom glumcu
+ * @param table -Tabela koja se koristi
+ * @param index -Selektovan glumac
+ */
 	public static void prikaziProzorGlumac(JTable table, int index) {
 		int glumac = table.getSelectedRow();
 		if (index == 0 || index == 1 || index == 2) {
@@ -72,12 +84,18 @@ public class GUIKontroler {
 			glumacProzor.setVisible(true);
 		}
 	}
-
+/**
+ * Prikazuje spisak epizoda, sa detaljima, izabrane serije
+ * @param index -Selektovana serija
+ */
 	public static void PrikaziProzorEpizode(int index) {
 		EpizodaGUI epizodeProzor = new EpizodaGUI(index);
 		epizodeProzor.setVisible(true);
 	}
-
+/**
+ * Pravi comboBox
+ * @return Combobox koji odgovara aplikaciji
+ */
 	public static DefaultComboBoxModel<String> napuniCBModel() {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 		LinkedList<Serija> serije = GUIKontroler.ucitajIzFajla();
@@ -87,7 +105,10 @@ public class GUIKontroler {
 		model.addElement(serije.get(2).getNaziv());
 		return model;
 	}
-
+/**
+ * Upisuje listu serija u binarnu datoteku
+ * @param serije -Lista serija koje se upisuju
+ */
 	public static void upisiUFajl(LinkedList<Serija> serije) {
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("resources\\serije.out", false));
@@ -98,7 +119,12 @@ public class GUIKontroler {
 			e1.printStackTrace();
 		}
 	}
-
+/**
+ * Menja status epizode u "pregledano" kada se klikne na nju i obrnuto
+ * @param serije -Lista serija
+ * @param index -Izabrana serija
+ * @param listIndex -Izabrana epizoda
+ */
 	public static void promeniStatusEpizode(LinkedList<Serija> serije, int index, int listIndex) {
 		Serija serija = serije.get(index);
 		LinkedList<Epizoda> epizode = serija.getEpizode();
@@ -112,7 +138,11 @@ public class GUIKontroler {
 
 		GUIKontroler.upisiUFajl(serije);
 	}
-
+/**
+ * Pravi listu
+ * @param index -Izabrana lista
+ * @return Listu koja odgovara aplikaciji
+ */
 	public static DefaultListModel<String> napuniModelLista(int index) {
 		LinkedList<Serija> serije = GUIKontroler.ucitajIzFajla();
 
