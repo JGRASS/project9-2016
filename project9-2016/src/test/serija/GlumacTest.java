@@ -1,10 +1,12 @@
-package serija;
+package test.serija;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import serija.Glumac;
 
 public class GlumacTest {
 	Glumac glumac;

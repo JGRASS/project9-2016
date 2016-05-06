@@ -1,4 +1,4 @@
-package serija;
+package test.serija;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,10 @@ import java.util.LinkedList;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import serija.Epizoda;
+import serija.Glumac;
+import serija.Serija;
 
 public class SerijaTest {
 	Serija serija;
